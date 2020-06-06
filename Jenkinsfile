@@ -24,7 +24,7 @@ pipeline {
      steps {
     
                kubernetesDeploy(
-		       configs: 'pods.yml',
+		       configs: 'springBootMongo.yml',
 		       kubeconfigId: 'KUBERNETES-CLUSTER-CONFIG',
 		       enableConfigSubstitution: true
 		       )
