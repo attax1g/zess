@@ -12,7 +12,7 @@ spec:
         name: spring-boot-mongo-docker
     spec:
       containers:
-      - image: dockerhandson/spring-boot-mongo
+      - image: raouagara/spring-boot-mongo
         name: spring-boot-mongo-docker
         ports:
         - name: spring-boot-mongo-docker
