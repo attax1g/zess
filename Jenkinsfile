@@ -37,7 +37,7 @@ pipeline {
      steps {
     
                kubernetesDeploy(
-		       configs: 'springBootMongo.yml',
+		       configs: 'javawebapp-deployment.yml',
 		       kubeconfigId: 'mykubeconf',
 		       enableConfigSubstitution: true
 		       )
