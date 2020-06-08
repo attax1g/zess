@@ -5,6 +5,15 @@ pipeline {
        
     }
     stages{
+	    stage("mvn build") {
+            steps {
+                script {
+                    // If you are using Windows then you should use "bat" step
+                    // Since unit testing is out of the scope we skip them
+                    sh "mvn package -DskipTests=true"
+                }
+            }
+        }
         stage('Build Docker Image'){
             steps{
                 sh "docker build . -t raouagara/spring-boot-mongo-docker:${DOCKER_TAG}"
@@ -25,7 +34,7 @@ pipeline {
     
                kubernetesDeploy(
 		       configs: 'springBootMongo.yml',
-		       kubeconfigId: 'KUBERNETES-CLUSTER-CONFIG',
+		       kubeconfigId: 'mykubeconf',
 		       enableConfigSubstitution: true
 		       )
 	    }    
