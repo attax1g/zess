@@ -14,10 +14,8 @@ spec:
       containers:
       - image: raouagara/spring-boot-mongo
         name: spring-boot-mongo-docker
-        ports:
-       //- name: spring-boot-mongo-docker
-         //containerPort: 8080      
-        - name: http-port
+        ports:  
+      - name: http-port
               containerPort: 8080
-        - name: jnlp-port
+      - name: jnlp-port
               containerPort: 50000
