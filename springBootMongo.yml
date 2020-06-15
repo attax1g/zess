@@ -14,9 +14,9 @@ spec:
     spec: 
       containers: 
         - 
-          image: raouagara/spring-boot-mongo
+          image: raouagara/spring-boot-mongo-docker
           imagePullPolicy: Never
-          name: spring-boot-mongo-docker
+          name: spring-boot-mongo-docker-docker
           ports: 
             - 
               containerPort: 8080
