@@ -24,4 +24,3 @@ spec:
             - 
               containerPort: 50000
               name: jnlp-port
-
