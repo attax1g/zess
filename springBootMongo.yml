@@ -1,26 +1,45 @@
---- 
-apiVersion: v1
 kind: Deployment
-metadata: 
-  labels: 
-    name: spring-boot-mongo-docker
-  name: spring-controller
-spec: 
-  replicas: 1
-  template: 
-    metadata: 
-      labels: 
-        name: spring-boot-mongo-docker
-    spec: 
-      containers: 
-        - 
-          image: raouagara/spring-boot-mongo-docker
-          imagePullPolicy: Never
-          name: spring-boot-mongo-docker-docker
-          ports: 
-            - 
-              containerPort: 8080
-              name: http-port
-            - 
-              containerPort: 50000
-              name: jnlp-port
+apiVersion: apps/v1
+metadata:
+  name: java-ee-kubernetes
+spec:
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: java-ee-kubernetes
+  template:
+    metadata:
+      labels:
+        app: java-ee-kubernetes
+    spec:
+      containers:
+        - name: java-ee-kubernetes
+          image: raouagara/java-ee-kubernetes
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 45
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 45
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: java-ee-kubernetes
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: java-ee-kubernetes
