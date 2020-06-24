@@ -27,7 +27,7 @@ pipeline {
             steps{
 		    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
 			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
-			    sh "docker push raouagara/java-ee-kubernetes:${DOCKER_TAG}"
+			    sh "docker push raouagara/spring:${DOCKER_TAG}"
     }
 	    }
 	     }
