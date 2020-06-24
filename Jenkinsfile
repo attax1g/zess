@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Build Docker Image'){
             steps{
-                sh "docker build . -t raouagara/java-ee-kubernetes:${DOCKER_TAG}"
+                sh "docker build . -t raouagara/spring:${DOCKER_TAG}"
             }
         }
 	     stage('Docker push image'){
