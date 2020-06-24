@@ -1,45 +1,35 @@
-kind: Deployment
-apiVersion: apps/v1
+apiVersion: v1
+kind: ReplicationController
 metadata:
-  name: java-ee-kubernetes
+  labels:
+    name: springboot
+  name: spring-controller
 spec:
   replicas: 1
-  selector: 
-    matchLabels:
-      app: java-ee-kubernetes
   template:
     metadata:
       labels:
-        app: java-ee-kubernetes
+        name: springboot
     spec:
       containers:
-        - name: java-ee-kubernetes
-          image: raouagara/java-ee-kubernetes
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 45
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 45
-      restartPolicy: Always
+      - image: raouagara/spring-boot-mongo
+        name: springboot
+        ports:
+        - name: springboot
+          containerPort: 8080      
 ---
-kind: Service
+# Node Port Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: java-ee-kubernetes
+  labels:
+    name: springboot
+  name: springboot
 spec:
   type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
-      protocol: TCP
-      nodePort: 31000
   selector:
-    app: java-ee-kubernetes
+    name: springboot
+---
