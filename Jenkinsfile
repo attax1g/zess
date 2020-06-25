@@ -20,14 +20,14 @@ pipeline {
         }
         stage('Build Docker Image'){
             steps{
-                sh "docker build . -t raouagara/spring:${DOCKER_TAG}"
+                sh "docker build . -t raouagara/spring-boot-mongo:${DOCKER_TAG}"
             }
         }
 	     stage('Docker push image'){
             steps{
 		    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
 			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
-			    sh "docker push raouagara/spring:${DOCKER_TAG}"
+			    sh "docker push raouagara/spring-boot-mongo:${DOCKER_TAG}"
     }
 	    }
 	     }
