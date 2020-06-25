@@ -13,8 +13,6 @@ spec:
       containers:
       - image: raouagara/spring
         name: spring
-      imagePullSecrets:
-      - name: registry-secret
         ports:
         - name: spring
           containerPort: 8080      
