@@ -16,7 +16,8 @@ spec:
         - name: spring
           image: raouagara/spring
       imagePullSecrets:
-        - name: registry-secret imagePullPolicy: Always
+        - name: registry-secret 
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           readinessProbe:
