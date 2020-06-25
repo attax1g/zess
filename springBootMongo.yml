@@ -8,10 +8,10 @@ spec:
   template:
     metadata:
       labels:
-        name: spring
+        name: spring-boot-mongo
     spec:
       containers:
-      - image: raouagara/spring-boot-mongo
+      - image: raouagara/spring-boot-mongo:latest
         name: spring-boot-mongo
         ports:
         - name: spring-boot-mongo
@@ -32,3 +32,46 @@ spec:
   selector:
     name: spring-boot-mongo
 ---
+# Mongo host path rc
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: mongo
+  name: mongo-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: mongo
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        ports:
+        - name: mongo
+          containerPort: 27017
+          hostPort: 27017
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-persistent-storage
+        hostPath:
+         path: /tmp/dbbackup
+---
+# Mongo Node Port RC
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongo
+  name: mongo
+spec:
+  type: ClusterIP
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    name: mongo
