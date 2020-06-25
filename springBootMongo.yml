@@ -14,6 +14,8 @@ spec:
       containers:
       - image: raouagara/spring-boot-mongo
         name: springboot
+      imagePullSecrets:
+    - name: registry-secret
         ports:
         - name: springboot
           containerPort: 8080      
