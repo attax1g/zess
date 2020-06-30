@@ -37,20 +37,20 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: mongo
+    name: mongoo
   name: mongo-controller
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: mongo
+        name: mongoo
     spec:
       containers:
-      - image: mongo
-        name: mongo
+      - image: mongoo
+        name: mongoo
         ports:
-        - name: mongo
+        - name: mongoo
           containerPort: 27017
           hostPort: 27017
         volumeMounts:
@@ -66,12 +66,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: mongo
-  name: mongo
+    name: mongoo
+  name: mongoo
 spec:
   type: ClusterIP
   ports:
     - port: 27017
       targetPort: 27017
   selector:
-    name: mongo
+    name: mongoo
