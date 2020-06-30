@@ -25,7 +25,7 @@ metadata:
     name: spring-boot-mongo
   name: spring-boot-mongo
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 8080
       targetPort: 8080
@@ -51,8 +51,8 @@ spec:
         name: mongo
         ports:
         - name: mongo
-          containerPort: 27017
-          hostPort: 27017
+          containerPort: 30000
+          hostPort: 30000
         volumeMounts:
         - name: mongo-persistent-storage
           mountPath: /data/db
@@ -71,7 +71,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 27017
-      targetPort: 27017
+    - port: 30000
+      targetPort: 30000
   selector:
     name: mongo
