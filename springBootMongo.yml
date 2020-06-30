@@ -2,19 +2,19 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: spring-boot-mongo
+    name: spring-boot-mongoo
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: spring-boot-mongo
+        name: spring-boot-mongoo
     spec:
       containers:
       - image: raouagara/spring-boot-mongo:latest
-        name: spring-boot-mongo
+        name: spring-boot-mongoo
         ports:
-        - name: spring-boot-mongo
+        - name: spring-boot-mongoo
           containerPort: 8080      
 ---
 # Node Port Service
@@ -22,15 +22,15 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: spring-boot-mongo
-  name: spring-boot-mongo
+    name: spring-boot-mongoo
+  name: spring-boot-mongoo
 spec:
   type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    name: spring-boot-mongo
+    name: spring-boot-mongoo
 ---
 # Mongo host path rc
 apiVersion: v1
