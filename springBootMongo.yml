@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   labels:
     name: spring-boot-mongo
@@ -25,7 +25,7 @@ metadata:
     name: spring-boot-mongo
   name: spring-boot-mongo
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
@@ -33,8 +33,8 @@ spec:
     name: spring-boot-mongo
 ---
 # Mongo host path rc
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   labels:
     name: mongo
