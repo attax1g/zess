@@ -46,6 +46,38 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	 <dependencyManagement>
+	<dependencies>
+	<dependency>
+	  <groupId>org.sonarsource.scanner.maven</groupId>
+    <artifactId>sonar-maven-plugin</artifactId>
+    <version>3.3.0.1492</version>
+		  </dependency>
+		</dependencies>
+		  </dependencyManagement>
+	<profiles>
+		<profile>
+   <id>sonarqube</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+     <properties>
+        <sonar.host.url>http://localhost:9000>
+     </sonar.host.url>
+     </properties>
+</profile>
+	</profiles>
+		<distributionManagement>
+		 <snapshotRepository>
+		    <id>nexus</id>
+		    <url>http://localhost:8081/repository/maven-snapshots/</url>
+		 </snapshotRepository>
+		
+		<repository>
+		    <id>nexus</id>
+		    <url>http://127.0.0.1:8081/repository/maven-releases/</url>
+		</repository>
+  	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
