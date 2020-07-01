@@ -1,6 +1,6 @@
 sonar.projectKey = Project
-sonar.projectName = parking
+sonar.projectName = CI/CDtest
 sonar.projectVersion = 1.0
 sonar.javascript.file.suffixes = .java, .js, .jsx
-sonar.sources = /var/lib/jenkins/workspace/parking
+sonar.sources = /var/lib/jenkins/workspace/CI/CDtest
 sonar.sourceEncoding = UTF-8
