@@ -33,7 +33,7 @@ pipeline {
 	     }
    
 
-	    stage('Deploy app') {
+	    //stage('Deploy app') {
      steps {
     
                kubernetesDeploy(
@@ -42,7 +42,12 @@ pipeline {
 		       enableConfigSubstitution: true
 		       )
 	    }    
-	}
+	}//
+	stage('Deploy app in k8S') {
+     steps {
+     sh 'kubectl apply -f springBootMongo.yml'
+     }
+     }
     }
 }
 def getDockerTag() {
