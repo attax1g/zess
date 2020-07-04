@@ -29,6 +29,8 @@ pipeline {
 			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
 			    sh "docker push raouagara/spring-boot-mongo:${DOCKER_TAG}"
     }
+    }
+    }
 	 stage('Deploy app on k8S'){
      steps{
                kubernetesDeploy(
@@ -40,8 +42,6 @@ pipeline {
 	}
 	     }
   
-    }
-}
 def getDockerTag() {
 		def tag = sh script: 'git rev-parse HEAD', returnStdout: true
 		return tag 
