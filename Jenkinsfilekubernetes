@@ -29,8 +29,8 @@ pipeline {
 			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
 			    sh "docker push raouagara/spring-boot-mongo:${DOCKER_TAG}"
     }
-	 stage('Deploy app') {
-     steps {
+	 stage('Deploy app on k8S'){
+     steps{
                kubernetesDeploy(
 		       configs: 'springBootMongo.yml',
 		       kubeconfigId: 'mykubeconfig',
@@ -39,9 +39,7 @@ pipeline {
 	    }    
 	}    }
 	     }
-   
-
-	
+  
     }
 }
 def getDockerTag() {
