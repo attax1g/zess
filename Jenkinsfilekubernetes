@@ -37,8 +37,6 @@ pipeline {
 		       enableConfigSubstitution: true
 		       )
 	    }    
-	}  
-	}
 	
 	     }
   
