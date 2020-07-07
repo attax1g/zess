@@ -20,6 +20,8 @@ pipeline {
         NEXUS_REPOSITORY = "CICDtest"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
+        
+        DOCKER_TAG=getDockerTag()
     }
 
     stages {
@@ -100,5 +102,32 @@ stage("Building SONAR") {
           }
     }
 }
+        
+    stage('Build Docker Image'){
+            steps{
+                sh "docker build . -t raouagara/spring-boot-mongo:${DOCKER_TAG}"
+            }
+        }
+	     stage('Docker push image'){
+            steps{
+		    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
+			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
+			    sh "docker push raouagara/spring-boot-mongo:${DOCKER_TAG}"
     }
-}   
+    }
+    }
+	 stage('Deploy app on k8S'){
+     steps{
+               kubernetesDeploy(
+		       configs: 'springBootMongo.yml',
+		       kubeconfigId: 'mykubeconfig',
+		       enableConfigSubstitution: true
+		       )
+	    }    
+	}
+	     }
+  }
+def getDockerTag() {
+		def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+		return tag 
+	} 
