@@ -51,8 +51,8 @@ spec:
         name: mongoo
         ports:
         - name: mongoo
-          containerPort: 27017
-          hostPort: 27017
+          containerPort: 27018
+          hostPort: 27018
         volumeMounts:
         - name: mongo-persistent-storage
           mountPath: /data/db
@@ -71,7 +71,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 27017
-      targetPort: 27017
+    - port: 27018
+      targetPort: 27018
   selector:
     name: mongoo
